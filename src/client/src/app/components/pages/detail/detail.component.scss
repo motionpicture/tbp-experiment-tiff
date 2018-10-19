@@ -15,7 +15,18 @@
     bottom: 15px;
     right: 15px;
 }
-
+.outer {
+    position: relative;
+    z-index: 2;
+}
+.area {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    position: fixed;
+}
 
 @function multiple-box-shadow ($n) {
     $value: '#{random(2000)}px #{random(2000)}px #FFF';
