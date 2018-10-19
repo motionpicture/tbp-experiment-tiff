@@ -1,0 +1,11 @@
+<div class="p-3 fixed-top fixed-bottom d-flex align-items-center">
+    <div class="p-3 w-100 text-center">
+        <p class="mb-3">
+            生体情報を登録してください。
+        </p>
+        <div class="px-5">
+            <button (click)="registerFido()" [disabled]="isLoading | async" type="button" class="btn btn-block btn-outline-light">登録</button>
+        </div>
+
+    </div>
+</div>

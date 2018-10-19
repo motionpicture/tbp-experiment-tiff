@@ -1,0 +1,28 @@
+<div class="position-fixed setting" routerLink="/fido/remove">
+    <img class="w-100" src="/assets/images/setting.svg">
+</div>
+<div class="p-3">
+    <div class="text-center mb-4 large-text">購入済み一覧</div>
+    <p class="text-center mb-3">使用するチケットを選択してください。</p>
+    <ul>
+        <li class="bg-gradation-black mb-3 rounded px-3 pb-3">
+            <div class="mb-3">
+                <div class="p-3 border-bottom d-flex align-items-center">
+                    <div class="icon mr-3"><img class="w-100" src="/assets/images/icon_01.svg"></div>
+                    <div>ビズ・マスターズ・ヴォイス</div>
+                </div>
+                <div class="p-3 border-bottom d-flex align-items-center">
+                    <div class="icon mr-3"><img class="w-100" src="/assets/images/icon_02.svg"></div>
+                    <div>11/3(SUN) 18:10～19:50</div>
+                </div>
+                <div class="p-3 d-flex align-items-center">
+                    <div class="icon mr-3"><img class="w-100" src="/assets/images/icon_03.svg"></div>
+                    <div>TOHO シネマズ六本木 /SCREEN1</div>
+                </div>
+            </div>
+            <div class="px-5">
+                <button type="button" class="btn btn-outline-light btn-block" [disabled]="isLoading | async" (click)="authFido()">認証</button>
+            </div>
+        </li>
+    </ul>
+</div>
