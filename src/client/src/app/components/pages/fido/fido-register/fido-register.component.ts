@@ -42,7 +42,7 @@ export class FidoRegisterComponent implements OnInit {
             tap(() => {
                 this.error.subscribe((error) => {
                     this.openAlert({ title: 'エラー', body: (error === null) ? '' : error.message });
-                });
+                }).unsubscribe();
             })
         );
         race(success, fail).pipe(take(1)).subscribe();
