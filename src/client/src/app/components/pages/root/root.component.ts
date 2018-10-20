@@ -14,6 +14,7 @@ import * as reducers from '../../../store/reducers';
 })
 export class RootComponent implements OnInit {
     public registerList: Observable<any[]>;
+    public isWebView: boolean;
     constructor(
         private store: Store<reducers.IState>,
         private actions: Actions,
@@ -21,6 +22,7 @@ export class RootComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
+        this.isWebView = ((<any>window).wizViewMessenger !== undefined);
         this.registerList = this.store.pipe(select(reducers.getFidoRegisterList));
         this.store.dispatch(new LoadFido());
 
