@@ -1290,7 +1290,7 @@ var NotfoundComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>TEST registerList</p>\n<p>{{ (registerList | async) | json }}</p>\n<p>isWebView: {{ isWebView }}</p>"
+module.exports = "<p>TEST registerList</p>\n<p>{{ (registerList | async) | json }}</p>"
 
 /***/ }),
 
@@ -1348,8 +1348,21 @@ var RootComponent = /** @class */ (function () {
     }
     RootComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.isWebView = (window.wizViewMessenger !== undefined);
         this.registerList = this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["select"])(_store_reducers__WEBPACK_IMPORTED_MODULE_7__["getFidoRegisterList"]));
+        var time = 300;
+        var limit = 20;
+        var count = 0;
+        this.intervalId = setInterval(function () {
+            if (window.wizViewMessenger !== undefined
+                || count > limit) {
+                clearInterval(_this.intervalId);
+                _this.fidoLoad();
+            }
+            count++;
+        }, time);
+    };
+    RootComponent.prototype.fidoLoad = function () {
+        var _this = this;
         this.store.dispatch(new _store_actions_action__WEBPACK_IMPORTED_MODULE_6__["LoadFido"]());
         var success = this.actions.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_store_actions_action__WEBPACK_IMPORTED_MODULE_6__["ActionTypes"].LoadFidoSuccess), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function () {
             _this.registerList.subscribe(function () {

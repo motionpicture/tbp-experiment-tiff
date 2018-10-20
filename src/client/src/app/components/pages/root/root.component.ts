@@ -14,7 +14,7 @@ import * as reducers from '../../../store/reducers';
 })
 export class RootComponent implements OnInit {
     public registerList: Observable<any[]>;
-    public isWebView: boolean;
+    public intervalId: any;
     constructor(
         private store: Store<reducers.IState>,
         private actions: Actions,
@@ -22,8 +22,21 @@ export class RootComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
-        this.isWebView = ((<any>window).wizViewMessenger !== undefined);
         this.registerList = this.store.pipe(select(reducers.getFidoRegisterList));
+        const time = 300;
+        const limit = 20;
+        let count = 0;
+        this.intervalId = setInterval(() => {
+            if ((<any>window).wizViewMessenger !== undefined
+                || count > limit) {
+                clearInterval(this.intervalId);
+                this.fidoLoad();
+            }
+            count++;
+        }, time);
+    }
+
+    private fidoLoad() {
         this.store.dispatch(new LoadFido());
 
         const success = this.actions.pipe(
