@@ -1365,12 +1365,12 @@ var RootComponent = /** @class */ (function () {
         var _this = this;
         this.store.dispatch(new _store_actions_action__WEBPACK_IMPORTED_MODULE_6__["LoadFido"]());
         var success = this.actions.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_store_actions_action__WEBPACK_IMPORTED_MODULE_6__["ActionTypes"].LoadFidoSuccess), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function () {
-            _this.registerList.subscribe(function () {
-                // if (list.length > 0) {
-                //     this.router.navigate(['/list']);
-                //     return;
-                // }
-                // this.router.navigate(['/fido/register']);
+            _this.registerList.subscribe(function (list) {
+                if (list.length > 0) {
+                    _this.router.navigate(['/list']);
+                    return;
+                }
+                _this.router.navigate(['/fido/register']);
             }).unsubscribe();
         }));
         var fail = this.actions.pipe(Object(_ngrx_effects__WEBPACK_IMPORTED_MODULE_2__["ofType"])(_store_actions_action__WEBPACK_IMPORTED_MODULE_6__["ActionTypes"].LoadFidoFail), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function () {

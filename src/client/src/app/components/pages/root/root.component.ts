@@ -42,13 +42,13 @@ export class RootComponent implements OnInit {
         const success = this.actions.pipe(
             ofType(ActionTypes.LoadFidoSuccess),
             tap(() => {
-                this.registerList.subscribe(() => {
-                    // if (list.length > 0) {
-                    //     this.router.navigate(['/list']);
+                this.registerList.subscribe((list) => {
+                    if (list.length > 0) {
+                        this.router.navigate(['/list']);
 
-                    //     return;
-                    // }
-                    // this.router.navigate(['/fido/register']);
+                        return;
+                    }
+                    this.router.navigate(['/fido/register']);
                 }).unsubscribe();
             })
         );
