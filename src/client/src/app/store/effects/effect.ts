@@ -50,7 +50,8 @@ export class Effects {
                 if (!registerResult.isSuccess) {
                     throw Error(registerResult.error);
                 }
-                return new RegisterFidoSuccess();
+                const registerList = registerResult.result;
+                return new RegisterFidoSuccess(registerList);
             } catch (error) {
                 return new RegisterFidoFail({ error: error });
             }

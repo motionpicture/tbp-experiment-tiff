@@ -14,7 +14,7 @@ import * as reducers from '../store/reducers';
     providedIn: 'root'
 })
 export class FidoGuardService implements CanActivate {
-    public error: Observable<Error | null>;
+    public registerList: Observable<any[]>;
     constructor(
         private router: Router,
         private store: Store<reducers.IState>,
@@ -26,30 +26,37 @@ export class FidoGuardService implements CanActivate {
      * @method canActivate
      */
     public async canActivate() {
-        this.error = this.store.pipe(select(reducers.getError));
         try {
-            await this.loadFido();
+            const registerList = await this.loadFido();
+            if (registerList.length === 0) {
+                throw new Error('registerList.length is not found');
+            }
+
             return true;
         } catch (error) {
-            console.log('canActivate', error);
             this.router.navigate(['/fido/register']);
             return false;
         }
+
     }
 
     private async loadFido() {
+        const registerList = this.store.pipe(select(reducers.getFidoRegisterList));
         this.store.dispatch(new LoadFido());
-        return new Promise((resolve, reject) => {
+
+        return new Promise<any[]>((resolve, reject) => {
             const success = this.actions.pipe(
                 ofType(ActionTypes.LoadFidoSuccess),
-                tap(() => resolve())
+                tap(() => {
+                    registerList.subscribe((list) => {
+                        resolve(list);
+                    }).unsubscribe();
+                })
             );
             const fail = this.actions.pipe(
                 ofType(ActionTypes.LoadFidoFail),
                 tap(() => {
-                    this.error.subscribe((error) => {
-                        reject(error);
-                    });
+                    reject();
                 })
             );
             race(success, fail).pipe(take(1)).subscribe();

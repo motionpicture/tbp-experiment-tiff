@@ -30,7 +30,7 @@ export class RegisterFido implements Action {
  */
 export class RegisterFidoSuccess implements Action {
     public readonly type = ActionTypes.RegisterFidoSuccess;
-    constructor(public payload?: {}) { }
+    constructor(public payload: {registerList: any[]}) { }
 }
 
 /**
