@@ -2,6 +2,15 @@
   "name": "tbp-experiment-tiff",
   "version": "0.0.0",
   "license": "MIT",
+  "author": {
+    "name": "Motionpicture co.,ltd."
+  },
+  "contributors": [
+    {
+      "email": "hataguchi@motionpicture.jp",
+      "name": "Akito Hataguchi"
+    }
+  ],
   "scripts": {
     "ng": "ng",
     "build-client": "ng build --configuration=default",

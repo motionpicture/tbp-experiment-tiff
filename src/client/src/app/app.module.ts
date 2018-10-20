@@ -23,6 +23,7 @@ import { FooterComponent } from './components/parts/footer/footer.component';
 import { HeaderComponent } from './components/parts/header/header.component';
 import { LoadingComponent } from './components/parts/loading/loading.component';
 
+import { RootComponent } from './components/pages/root/root.component';
 import {
     AppRoutingModule,
     StoreModule
@@ -45,7 +46,8 @@ import { CoreStoreModule } from './store/core/store';
         FidoRegisterComponent,
         FidoRemoveComponent,
         ListComponent,
-        DetailComponent
+        DetailComponent,
+        RootComponent
     ],
     entryComponents: [
         AlertModalComponent,

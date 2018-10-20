@@ -11,9 +11,11 @@ import { FidoRegisterComponent } from '../components/pages/fido/fido-register/fi
 import { FidoRemoveComponent } from '../components/pages/fido/fido-remove/fido-remove.component';
 import { ListComponent } from '../components/pages/list/list.component';
 import { NotfoundComponent } from '../components/pages/notfound/notfound.component';
+import { RootComponent } from '../components/pages/root/root.component';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/list', pathMatch: 'full' },
+    { path: '', redirectTo: '/root', pathMatch: 'full' },
+    { path: 'root', component: RootComponent },
     {
         path: 'fido',
         children: [
@@ -30,7 +32,6 @@ const appRoutes: Routes = [
     {
         path: '',
         component: BaseComponent,
-        canActivate: [FidoGuardService],
         children: [
             { path: 'list', canActivate: [FidoGuardService], component: ListComponent },
             { path: 'detail', canActivate: [FidoGuardService], component: DetailComponent }
