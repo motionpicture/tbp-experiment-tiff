@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
-import { Observable, race } from 'rxjs';
+import { race } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { ActionTypes, LoadFido } from '../store/actions/action';
 import * as reducers from '../store/reducers';
@@ -14,7 +14,6 @@ import * as reducers from '../store/reducers';
     providedIn: 'root'
 })
 export class FidoGuardService implements CanActivate {
-    public registerList: Observable<any[]>;
     constructor(
         private router: Router,
         private store: Store<reducers.IState>,
