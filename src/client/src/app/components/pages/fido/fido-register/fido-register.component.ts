@@ -34,7 +34,7 @@ export class FidoRegisterComponent implements OnInit {
         const success = this.actions.pipe(
             ofType(ActionTypes.RegisterFidoSuccess),
             tap(() => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/list']);
             })
         );
         const fail = this.actions.pipe(
