@@ -42,6 +42,9 @@ export class FidoRemoveComponent implements OnInit {
             ofType(ActionTypes.DeleteFidoFail),
             tap(() => {
                 this.error.subscribe((error) => {
+                    if (error !== null && (/CANCELED/.test(error.message))) {
+                        return;
+                    }
                     this.openAlert({ title: 'エラー', body: (error === null) ? '' : error.message });
                 }).unsubscribe();
             })

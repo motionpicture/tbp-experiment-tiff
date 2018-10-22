@@ -23,8 +23,8 @@ export class RootComponent implements OnInit {
 
     public ngOnInit() {
         this.registerList = this.store.pipe(select(reducers.getFidoRegisterList));
-        const time = 300;
-        const limit = 20;
+        const time = 100;
+        const limit = 30;
         let count = 0;
         this.intervalId = setInterval(() => {
             if ((<any>window).wizViewMessenger !== undefined

@@ -41,6 +41,9 @@ export class FidoRegisterComponent implements OnInit {
             ofType(ActionTypes.RegisterFidoFail),
             tap(() => {
                 this.error.subscribe((error) => {
+                    if (error !== null && (/CANCELED/.test(error.message))) {
+                        return;
+                    }
                     this.openAlert({ title: 'エラー', body: (error === null) ? '' : error.message });
                 }).unsubscribe();
             })
