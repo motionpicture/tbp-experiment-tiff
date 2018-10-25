@@ -16,3 +16,4 @@ export const getFeatureState = createFeatureSelector<reducer.IState>('App');
 export const getLoading = createSelector(getFeatureState, reducer.getLoading);
 export const getFidoRegisterList = createSelector(getFeatureState, reducer.getFidoRegisterList);
 export const getError = createSelector(getFeatureState, reducer.getError);
+export const getIsDisplay = createSelector(getFeatureState, reducer.getIsDisplay);

@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import * as moment from 'moment';
 import { map, mergeMap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { FidoAction, NativeService } from '../../services/native';
@@ -11,6 +13,9 @@ import {
     DeleteFido,
     DeleteFidoFail,
     DeleteFidoSuccess,
+    GetDisplayStartDate,
+    GetDisplayStartDateFail,
+    GetDisplayStartDateSuccess,
     LoadFido,
     LoadFidoFail,
     LoadFidoSuccess,
@@ -27,7 +32,8 @@ export class Effects {
 
     constructor(
         private actions: Actions,
-        private native: NativeService
+        private native: NativeService,
+        private http: HttpClient
     ) { }
 
     /**
@@ -144,6 +150,28 @@ export class Effects {
                 return new DeleteFidoSuccess();
             } catch (error) {
                 return new DeleteFidoFail({ error: error });
+            }
+        })
+    );
+
+    /**
+     * GetDisplayStartDate
+     */
+    @Effect()
+    public getDisplayStartDate = this.actions.pipe(
+        ofType<GetDisplayStartDate>(ActionTypes.GetDisplayStartDate),
+        map(action => action.payload),
+        mergeMap(async () => {
+            try {
+                const url = '/api/getDisplayStartDate';
+                const response = await this.http.post<{ result: string }>(url, {}).toPromise();
+                let isDisplay = true;
+                if (response.result !== '') {
+                    isDisplay = (moment(response.result).unix() < moment().unix());
+                }
+                return new GetDisplayStartDateSuccess({ isDisplay });
+            } catch (error) {
+                return new GetDisplayStartDateFail({ error: error });
             }
         })
     );

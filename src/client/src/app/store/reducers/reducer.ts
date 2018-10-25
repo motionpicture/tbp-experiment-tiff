@@ -12,6 +12,7 @@ export interface IState {
     fido: {
         registerList: any[]
     };
+    isDisplay: boolean;
 }
 
 /**
@@ -22,7 +23,8 @@ export const initialState: IState = {
     error: null,
     fido: {
         registerList: []
-    }
+    },
+    isDisplay: false
 };
 
 /**
@@ -77,6 +79,16 @@ export function reducer(
             const error = action.payload.error;
             return { ...state, loading: false, error: error };
         }
+        case ActionTypes.GetDisplayStartDate: {
+            return { ...state, loading: true };
+        }
+        case ActionTypes.GetDisplayStartDateSuccess: {
+            return { ...state, loading: false, error: null, isDisplay: action.payload.isDisplay };
+        }
+        case ActionTypes.GetDisplayStartDateFail: {
+            const error = action.payload.error;
+            return { ...state, loading: false, error: error };
+        }
         default: {
             return state;
         }
@@ -89,3 +101,4 @@ export function reducer(
 export const getLoading = (state: IState) => state.loading;
 export const getFidoRegisterList = (state: IState) => state.fido.registerList;
 export const getError = (state: IState) => state.error;
+export const getIsDisplay = (state: IState) => state.isDisplay;

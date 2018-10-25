@@ -15,6 +15,9 @@ export enum ActionTypes {
     DeleteFido = '[Fido] Delete',
     DeleteFidoSuccess = '[Fido] Delete Success',
     DeleteFidoFail = '[Fido] Delete Fail',
+    GetDisplayStartDate = '[Fido] Get Display Start Date',
+    GetDisplayStartDateSuccess = '[Fido] Get Display Start Date Success',
+    GetDisplayStartDateFail = '[Fido] Get Display Start Date Fail'
 }
 
 /**
@@ -114,6 +117,31 @@ export class DeleteFidoFail implements Action {
     constructor(public payload: { error: Error }) { }
 }
 
+
+/**
+ * GetDisplayStartDate
+ */
+export class GetDisplayStartDate implements Action {
+    public readonly type = ActionTypes.GetDisplayStartDate;
+    constructor(public payload?: {}) { }
+}
+
+/**
+ * GetDisplayStartDateSuccess
+ */
+export class GetDisplayStartDateSuccess implements Action {
+    public readonly type = ActionTypes.GetDisplayStartDateSuccess;
+    constructor(public payload: { isDisplay: boolean; }) { }
+}
+
+/**
+ * GetDisplayStartDateFail
+ */
+export class GetDisplayStartDateFail implements Action {
+    public readonly type = ActionTypes.GetDisplayStartDateFail;
+    constructor(public payload: { error: Error }) { }
+}
+
 /**
  * Actions
  */
@@ -129,4 +157,7 @@ export type Actions =
     | AuthFidoFail
     | DeleteFido
     | DeleteFidoSuccess
-    | DeleteFidoFail;
+    | DeleteFidoFail
+    | GetDisplayStartDate
+    | GetDisplayStartDateSuccess
+    | GetDisplayStartDateFail;
